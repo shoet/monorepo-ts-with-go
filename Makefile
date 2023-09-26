@@ -1,30 +1,30 @@
 # .PHONY: help build-backend build-local up down logs ps generate
-.PHONY: help build_backend build_local up down logs ps generate
+.PHONY: help build build_local up down logs ps generate app
 .DEFAULT_GOAL := help
 
 DOCKER_TAG := latest
-build_api: ## Build docker image to deploy
+build: ## Build docker image to deploy
 	docker build -t monorepo-ts-with-go-api:${DOCKER_TAG} --target deploy ./backend
 
-build_api_local: ## Build docker image to local development
+build_local: ## Build docker image to local development
 	docker compose build --no-cache
 
-up_api: ## Do docker compose up with hot reload
+up: ## Do docker compose up with hot reload
 	docker compose up -d
 
-down_api: ## Do docker compose down
+down: ## Do docker compose down
 	docker compose down
 
-logs_api: ## Tail docker compose logs
+logs: ## Tail docker compose logs
 	docker compose logs -f
 
-ps_api: ## Check container status
+ps: ## Check container status
 	docker compose ps
 
-generate_api: ## Generate codes
+generate: ## Generate codes
 	go generate ./...
 
-up_front: ## Start frontend development
+app: ## Start frontend development
 	cd frontend && npm run dev
 
 help: ## Show options

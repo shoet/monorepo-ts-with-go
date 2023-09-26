@@ -1,12 +1,17 @@
 package handler
 
-import "net/http"
+import (
+	"github.com/go-chi/chi/v5"
+)
 
-func NewMux() *http.ServeMux {
-	mux := http.NewServeMux()
-	mux.HandleFunc("/health", func(w http.ResponseWriter, r *http.Request) {
-		w.WriteHeader(http.StatusOK)
-		w.Write([]byte("OK"))
+func NewMux() *chi.Mux {
+	router := chi.NewRouter()
+	router.Route("/", func(r chi.Router) {
+		r.Use(CORSMiddleWare)
+		r.Route("/health", func(r chi.Router) {
+			hh := &HealthCheckHandler{}
+			r.Get("/", hh.ServeHTTP)
+		})
 	})
-	return mux
+	return router
 }
