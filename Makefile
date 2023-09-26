@@ -3,26 +3,29 @@
 .DEFAULT_GOAL := help
 
 DOCKER_TAG := latest
-build_backend: ## Build docker image to deploy
+build_api: ## Build docker image to deploy
 	docker build -t monorepo-ts-with-go-api:${DOCKER_TAG} --target deploy ./backend
 
-build_local: ## Build docker image to local development
+build_api_local: ## Build docker image to local development
 	docker compose build --no-cache
 
-up: ## Do docker compose up with hot reload
+up_api: ## Do docker compose up with hot reload
 	docker compose up -d
 
-down: ## Do docker compose down
+down_api: ## Do docker compose down
 	docker compose down
 
-logs: ## Tail docker compose logs
+logs_api: ## Tail docker compose logs
 	docker compose logs -f
 
-ps: ## Check container status
+ps_api: ## Check container status
 	docker compose ps
 
-generate: ## Generate codes
+generate_api: ## Generate codes
 	go generate ./...
+
+up_front: ## Start frontend development
+	cd frontend && npm run dev
 
 help: ## Show options
 	@grep -E '^[a-zA-Z_]+:.*?## .*$$' $(MAKEFILE_LIST) | \
