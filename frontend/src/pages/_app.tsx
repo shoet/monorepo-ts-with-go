@@ -1,4 +1,3 @@
-import "@/styles/globals.css";
 import { fetcher } from "@/utils/http";
 import type { AppProps } from "next/app";
 import { SWRConfig } from "swr";
