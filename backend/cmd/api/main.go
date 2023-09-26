@@ -4,7 +4,7 @@ import (
 	"context"
 	"log"
 
-	"github.com/shoet/monorepo-ts-with-backend/handler"
+	"github.com/shoet/monorepo-ts-with-go/handler"
 )
 
 func main() {

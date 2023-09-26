@@ -1,9 +1,9 @@
 # .PHONY: help build-backend build-local up down logs ps generate
-.PHONY: help build_backend build_local up down logs ps generate
+.PHONY: help build build_local up down logs ps generate app
 .DEFAULT_GOAL := help
 
 DOCKER_TAG := latest
-build_backend: ## Build docker image to deploy
+build: ## Build docker image to deploy
 	docker build -t monorepo-ts-with-go-api:${DOCKER_TAG} --target deploy ./backend
 
 build_local: ## Build docker image to local development
@@ -23,6 +23,9 @@ ps: ## Check container status
 
 generate: ## Generate codes
 	go generate ./...
+
+app: ## Start frontend development
+	cd frontend && npm run dev
 
 help: ## Show options
 	@grep -E '^[a-zA-Z_]+:.*?## .*$$' $(MAKEFILE_LIST) | \

@@ -50,5 +50,6 @@ func (s *Server) Run(ctx context.Context) error {
 		return fmt.Errorf("failed to shutdown server in Run(): %w", err)
 	}
 	log.Println("server shutdowned")
+
 	return eg.Wait()
 }
